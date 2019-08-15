@@ -1,0 +1,8 @@
+scloud.depth > tile.depth
+reason: scloud spawned more frequently
+ 
+enemy.velocity change problem
+reason: velocity change only applied to enemy spawned before pressing arrow
+
+tile irregular spawning
+reason : tile spawning codition met irregularly.
