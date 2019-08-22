@@ -5,6 +5,7 @@ var clouds;
 var gamestate, pause, play;
 var s = 1;
 var prct = 0;
+var distance = 0;
 function preload() {
   grdimg = loadImage("sprites/ground3.png");
   rr = loadAnimation("mario an/1.png", "mario an/2.png", "mario an/3.png", "mario an/4.png", "mario an/5.png", "mario an/6.png", "mario an/7.png", "mario an/8.png");
@@ -34,9 +35,10 @@ function preload() {
   ftile = loadImage("sprites/ftile.png");
   bigtile = loadImage("sprites/ltile.png");
 
-  //bgm = loadSound("bgm.mp3");
+  bgm = loadSound("bgm.mp3");
   jumps = loadSound("jump.wav");
   stomp = loadSound("stomp.wav");
+  checkPoint = loadSound("smb_1-up.wav");
   gamestate = pause;
 
 
@@ -76,8 +78,8 @@ function setup() {
   tiles = new Group();
 
   // bgm.play();
-  //bgm.setVolume(0.5);
-  //bgm.loop();
+  // bgm.setVolume(0.2);
+  // bgm.loop();
 
 }
 function draw() {
@@ -92,6 +94,22 @@ function draw() {
    if (keyDown("space")) {
      gamestate = pause;
    }*/
+
+  rect(80, 10, 200, 60);
+  textSize(30);
+  text("Distance : ", 750, 30);
+  text(distance, 900, 30);
+  if (keyDown("RIGHT_ARROW") && World.frameCount % 5 === 0) {
+    distance = distance + 1;
+  }
+  if (keyDown("LEFT_ARROW") && distance >= 1 && World.frameCount % 5 === 0) {
+    distance = distance - 1;
+  }
+
+  if (distance != 0 && distance % 250 === 0) {
+    checkPoint.play();
+  }
+
   run();
   jump();
   groundReset();
@@ -110,6 +128,8 @@ function draw() {
     }
   }*/
   drawSprites();
+
+
   // console.log(prct);
 }
 
